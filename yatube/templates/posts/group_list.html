@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+  Записи сообщества {{ group.title }}
+{% endblock title %}
+{% block content %}
+  <h1>{{ group.title|capfirst }}</h1>
+  <p>{{ group.description|capfirst }}</p>
+  {% if page_obj %} 
+    {% include 'includes/posts.html' %}
+    {% include 'includes/paginator.html' %}
+  {% else %}
+    <h3>У этого сообщества пока нет постов.</h3> 
+  {% endif %}
+{% endblock content %}

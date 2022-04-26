@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+  Профайл пользователя
+  {% if profile.get_full_name %}
+     {{ profile.get_full_name }}
+  {% else %}
+    {{ profile.username }}
+  {% endif %}
+{% endblock title %}
+{% block content %}
+  <h1>
+    Все посты пользователя
+    {% if profile.get_full_name %}
+      {{ profile.get_full_name }}
+    {% else %}
+      {{ profile.username }}
+    {% endif %}
+  </h1>
+  {% if profile != request.user %}
+    {% include 'includes/following.html' %}
+  {% endif %}
+  {% if page_obj %}
+    <h3>Всего постов: {{ page_obj.paginator.count }}</h3>   
+    {% include 'includes/posts.html' %}
+    {% include 'includes/paginator.html' %}
+  {% else %}
+    <h3>У этого автора пока нет постов.</h3> 
+  {% endif %}
+{% endblock content %}
